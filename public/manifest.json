@@ -1,9 +1,29 @@
 {
-  "name": "Gitlab parser",
-  "version": "1.0",
   "manifest_version": 2,
+  "name": "Gitlab parser",
+  "description": "Gitlab parser",
+  "version": "0.0.1",
   "browser_action": {
-    "default_popup": "index.html"
+    "default_popup": "index.html",
+    "default_title": "Open gitlab parser"
   },
-  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
+  "icons": {
+    "16": "logo192.png",
+    "48": "logo192.png",
+    "128": "logo192.png"
+  },
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["app/background.js"]
+  },
+  "content_scripts" : [
+    {
+      "matches": [ "<all_urls>" ],
+      "js": ["/static/js/content.js"]
+    }
+  ]
 }

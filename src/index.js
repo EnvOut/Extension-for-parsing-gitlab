@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// import 'uikit';
-// import '../node_modules/uikit/css/uikit.css';
+import 'uikit'
+import 'uikit/dist/css/uikit.min.css'
+import 'uikit/dist/js/uikit-icons'
 
 ReactDOM.render(<App/>, document.getElementById('root'));
 

@@ -1,60 +1,47 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import sender from './services/sender'
+import StateSelector from './components/status.selector'
 
-function App() {
-    return (
-        <div className="App">
-            <div className="uk-container">
-                <CommonBtn handler={handleAdd} type='default' message='Add'/>
-                <CommonBtn handler={handleCopy} type='primary' message='Copy'/>
-                <CommonBtn handler={handleClear} type='secondary' message='Clear'/>
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <CommonBtn handler={e => sender.add()} type='default' message='Add'/>
+                <CommonBtn handler={e => sender.copy()} type='primary' message='Copy'/>
+                <CommonBtn handler={e => sender.clear()} type='secondary' message='Clear'/>
+                <div className="uk-container uk-width-1-1"><StateSelector/></div>
             </div>
-        </div>
-    );
-}
-
-var locations = [];
-
-function handleAdd() {
-    locations.push(window.location.href)
-}
-
-const copyToClipboard = str => {
-    const el = document.createElement('textarea');
-    el.value = str;
-    el.setAttribute('readonly', '');
-    el.style.position = 'absolute';
-    el.style.left = '-9999px';
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-};
-
-function handleCopy() {
-    let text = locations.join(",");
-
-    // chrome.tabs.getSelected(null,function(tab) {
-    //     text = tab.url;
-    // });
-
-    copyToClipboard(text);
-    console.log('title: ' + document.title);
-}
-
-function handleClear() {
-    locations.length = 0;
+        );
+    }
 }
 
 class CommonBtn extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+
+    constructor(props) {
+        super(props);
+        this.state = {click: false};
+    }
+
+    handleClick() {
+        this.setState({click: true});
+        setTimeout(() => {
+            this.setState({click: false});
+        }, 2000);
+
+        this.props.handler()
+    }
 
     render() {
-        return <button onClick={this.props.handler()}
-                       className={'uk-button uk-button-' + this.props.type + ' uk-width-1-1 uk-margin-small-bottom'}>{this.props.message}</button>;
+        return <div className={this.state.click === true ? ' uk-animation-slide-right uk-animation-reverse' : ''}>
+            <button onClick={e => this.handleClick()}
+                    className={'uk-button uk-button-' + this.props.type + ' uk-width-1-1 uk-margin-small-bottom'}>{this.props.message}</button>
+        </div>;
     }
 }
 

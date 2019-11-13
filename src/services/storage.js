@@ -2,6 +2,7 @@
 
 import utils from "./utils";
 import stateStore from "./state"
+import lodash from 'lodash'
 
 class SyncStorage {
     key = 'gitlab-helper.storage';
@@ -40,10 +41,7 @@ class SyncStorage {
                 const data = result[currentKey].items;
                 console.log('data: ', data);
                 if (data) {
-                    let text = data.filter(i => i)
-                        .filter(it => it.resp)
-                        .map(it => elementToText(it))
-                        .join('\n');
+                    let text = formatData(data);
                     utils.copyToClipboard(text)
                 }
 
@@ -58,10 +56,23 @@ class SyncStorage {
     }
 }
 
+function formatData(data) {
+    let stateTaskMap = lodash.groupBy(data, 'state');
+    console.log('grouped data', stateTaskMap)
+
+    return lodash.reverse(stateStore.getStates())
+        .map(state=>({state, tasks: stateTaskMap[state]}))
+        .filter(({state, tasks})=>tasks)
+        .filter(({state, tasks})=>tasks.length>0)
+        .map(({state, tasks}) => ({state, tasks: tasks.map(i=>i.resp)}))
+        .map(({state, tasks}) => ({state, tasks: tasks.join('\n')}))
+        .map(entity => 'Status: ' + entity.state + '\n' + entity.tasks + '\n')
+        .join('\n')
+}
+
 function elementToText(element) {
     const statePart = element.state ? '\n    Status: ' + element.state : '';
     return element.resp + statePart;
 }
 
 export default new SyncStorage();
-

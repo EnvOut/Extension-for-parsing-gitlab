@@ -1,7 +1,7 @@
 class StateStore {
-    states = ['IN PROGRESS', 'REVIEW', 'DONE'];
+    states = ['NEXT', 'IN PROGRESS', 'REVIEW', 'DONE'];
     // default REVIEW
-    activeId = 1;
+    activeId = 2;
 
     getStates() {
         return this.states

@@ -20,7 +20,7 @@ class StateSelector extends React.Component {
                                                                                          handler={id => this.handleClick(id)}
                                                                                          name={it}/>)
         return (
-            <ul className="uk-subnav" uk-margin>
+            <ul className="uk-subnav uk-subnav-pill" uk-margin>
                 {stateElementList}
             </ul>
         )

@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import sender from './services/sender'
+import StateSelector from './components/status.selector'
 
 class App extends React.Component {
     constructor(props) {
@@ -11,11 +12,10 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <div className="uk-container">
-                    <CommonBtn handler={e => sender.add()} type='default' message='Add'/>
-                    <CommonBtn handler={e => sender.copy()} type='primary' message='Copy'/>
-                    <CommonBtn handler={e => sender.clear()} type='secondary' message='Clear'/>
-                </div>
+                <CommonBtn handler={e => sender.add()} type='default' message='Add'/>
+                <CommonBtn handler={e => sender.copy()} type='primary' message='Copy'/>
+                <CommonBtn handler={e => sender.clear()} type='secondary' message='Clear'/>
+                <div className="uk-container uk-width-1-1"><StateSelector/></div>
             </div>
         );
     }

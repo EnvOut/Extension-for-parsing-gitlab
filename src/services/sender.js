@@ -3,7 +3,7 @@ import storage from "./storage";
 
 class Sender {
     add() {
-        console.log('call add')
+        console.log('call add');
 
         chrome.tabs.query({
             active: true,
@@ -26,12 +26,12 @@ class Sender {
     }
 
     copy() {
-        console.log('call copy')
+        console.log('call copy');
         storage.showData()
     }
 
     clear() {
-        console.log('call clear')
+        console.log('call clear');
         storage.clearData()
     }
 }

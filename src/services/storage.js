@@ -1,14 +1,18 @@
 /*global chrome*/
 
 import utils from "./utils";
+import stateStore from "./state"
 
 class SyncStorage {
     key = 'gitlab-helper.storage';
 
-    addData(element) {
-        console.log('addData: ', element);
+    addData(resp) {
+        console.log('addData: ', resp);
+
         const currentKey = this.key;
 
+        let state = stateStore.getActiveState();
+        const element = {resp, state};
         chrome.storage.sync.get(this.key, function (result) {
             console.log('storage result: ', result);
             let data = result[currentKey];
@@ -36,7 +40,11 @@ class SyncStorage {
                 const data = result[currentKey].items;
                 console.log('data: ', data);
                 if (data) {
-                    utils.copyToClipboard(data.filter(i => i).join('\n'))
+                    let text = data.filter(i => i)
+                        .filter(it => it.resp)
+                        .map(it => elementToText(it))
+                        .join('\n');
+                    utils.copyToClipboard(text)
                 }
 
             }
@@ -48,8 +56,11 @@ class SyncStorage {
             console.log('Was deleted ');
         });
     }
+}
 
-
+function elementToText(element) {
+    const statePart = element.state ? '\n    Status: ' + element.state : '';
+    return element.resp + statePart;
 }
 
 export default new SyncStorage();

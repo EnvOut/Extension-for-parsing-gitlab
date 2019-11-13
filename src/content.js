@@ -1,11 +1,6 @@
 /*global chrome*/
-import $ from "jquery";
 
-const selectors = {
-    title: 'h2.title',
-    taskNumber: '.breadcrumbs-sub-title > a',
-    project: '.js-breadcrumb-item-text:last'
-};
+import $ from "jquery";
 
 // Message Listener function
 chrome.runtime.onMessage.addListener((request, sender, response) => {
@@ -24,18 +19,11 @@ chrome.runtime.onMessage.addListener((request, sender, response) => {
 
 function fetchData() {
 // url = window.location.href
-//     const firstRedItem = document.querySelector('.red');
-//     const greenListItems = document.querySelectorAll('li.green');
-
     let title = $('h2.title').text();
     let number = $('.breadcrumbs-sub-title > a').text();
     let project = $('.js-breadcrumb-item-text:last').text();
 
-    // let title = document.querySelector(selectors.title).textContent;
-    // let number = document.querySelector(selectors.taskNumber).textContent;
-    // let project = document.querySelector(selectors.project).textContent;
-
-
     return '- ' + project + number + ' ' + title;
+
 }
 

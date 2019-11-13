@@ -3,6 +3,8 @@ import storage from "./storage";
 
 class Sender {
     add() {
+        console.log('call add')
+
         chrome.tabs.query({
             active: true,
             currentWindow: true,
@@ -24,10 +26,12 @@ class Sender {
     }
 
     copy() {
+        console.log('call copy')
         storage.showData()
     }
 
     clear() {
+        console.log('call clear')
         storage.clearData()
     }
 }

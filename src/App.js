@@ -7,9 +7,9 @@ function App() {
     return (
         <div className="App">
             <div className="uk-container">
-                <CommonBtn handler={sender.add()} type='default' message='Add'/>
-                <CommonBtn handler={sender.copy()} type='primary' message='Copy to buffer'/>
-                <CommonBtn handler={sender.clear()} type='secondary' message='Clear'/>
+                <CommonBtn handler={sender.add} type='default' message='Add'/>
+                <CommonBtn handler={sender.copy} type='primary' message='Copy'/>
+                <CommonBtn handler={sender.clear} type='secondary' message='Clear'/>
             </div>
         </div>
     );

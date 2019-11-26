@@ -1,5 +1,5 @@
 class StateStore {
-    states = ['NEXT', 'IN PROGRESS', 'REVIEW', 'DONE'];
+    states = ['Next', 'In Progress', 'Review', 'Done'];
     // default REVIEW
     activeId = 2;
 

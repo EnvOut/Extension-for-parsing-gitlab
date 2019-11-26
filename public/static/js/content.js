@@ -36,6 +36,6 @@ function fetchData() {
     // let project = document.querySelector(selectors.project).textContent;
 
 
-    return '- ' + project + number + ' ' + title;
+    return project + number + ' ' + title;
 }
 

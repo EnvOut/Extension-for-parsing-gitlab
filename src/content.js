@@ -23,7 +23,7 @@ function fetchData() {
     let number = $('.breadcrumbs-sub-title > a').text();
     let project = $('.js-breadcrumb-item-text:last').text();
 
-    return '- ' + project + number + ' ' + title;
+    return project + number + ' ' + title;
 
 }
 

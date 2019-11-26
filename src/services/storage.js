@@ -58,15 +58,15 @@ class SyncStorage {
 
 function formatData(data) {
     let stateTaskMap = lodash.groupBy(data, 'state');
-    console.log('grouped data', stateTaskMap)
+    console.log('grouped data', stateTaskMap);
 
     return lodash.reverse(stateStore.getStates())
-        .map(state=>({state, tasks: stateTaskMap[state]}))
-        .filter(({state, tasks})=>tasks)
-        .filter(({state, tasks})=>tasks.length>0)
-        .map(({state, tasks}) => ({state, tasks: tasks.map(i=>i.resp)}))
-        .map(({state, tasks}) => ({state, tasks: tasks.join('\n')}))
-        .map(entity => 'Status: ' + entity.state + '\n' + entity.tasks + '\n')
+        .map(state => ({state, tasks: stateTaskMap[state]}))
+        .filter(({state, tasks}) => tasks)
+        .filter(({state, tasks}) => tasks.length > 0)
+        .map(({state, tasks}) => ({state, tasks: tasks.map(i => i.resp)}))
+        .map(({state, tasks}) => ({state, tasks: tasks.map((el, i) => '' + (i + 1) + '. ' + el).join('\n')}))
+        .map(entity => entity.state + ':\n' + entity.tasks + '\n')
         .join('\n')
 }
 
